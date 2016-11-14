@@ -248,6 +248,10 @@ namespace Draw.Model
                         ResizeTopLeft(position);
                     else if (position.X >= currentShape.Key.End.X && position.Y >= currentShape.Key.End.Y)
                         modus = Modus.BottomRight;
+                    else if (position.X >= currentShape.Key.End.X && position.Y < currentShape.Key.End.Y)
+                        modus = Modus.BottomLeft;
+                    else if (position.X < currentShape.Key.End.X && position.Y >= currentShape.Key.End.Y)
+                        modus = Modus.TopRight;
                     OnModusChanged(modus);
                     break;
                 case Modus.BottomRight:
@@ -255,15 +259,64 @@ namespace Draw.Model
                         ResizeBottomRight(position);
                     else if (position.X <= currentShape.Key.Start.X && position.Y <= currentShape.Key.Start.Y)
                         modus = Modus.TopLeft;
+                    else if (position.X <= currentShape.Key.Start.X && position.Y > currentShape.Key.Start.Y)
+                        modus = Modus.BottomLeft;
+                    else if (position.X > currentShape.Key.Start.X && position.Y <= currentShape.Key.Start.Y)
+                        modus = Modus.TopRight;
                     OnModusChanged(modus);
                     break;
+                case Modus.TopRight:
+                    if (position.X > currentShape.Key.Start.X && position.Y < currentShape.Key.End.Y)
+                        ResizeTopRight(position);
+                    else if (position.X <= currentShape.Key.Start.X && position.Y >= currentShape.Key.End.Y)
+                        modus = Modus.BottomLeft;
+                    else if (position.X > currentShape.Key.Start.X && position.Y >= currentShape.Key.End.Y)
+                        modus = Modus.BottomRight;
+                    else if (position.X <= currentShape.Key.Start.X && position.Y < currentShape.Key.End.Y)
+                        modus = Modus.TopLeft;
+                    OnModusChanged(modus);
+                    break;
+                case Modus.BottomLeft:
+                    if (position.X < currentShape.Key.End.X && position.Y > currentShape.Key.Start.Y)
+                        ResizeBottomLeft(position);
+                    else if (position.X >= currentShape.Key.End.X && position.Y <= currentShape.Key.Start.Y)
+                        modus = Modus.TopRight;
+                    else if (position.X < currentShape.Key.End.X && position.Y <= currentShape.Key.Start.Y)
+                        modus = Modus.TopLeft;
+                    else if (position.X >= currentShape.Key.End.X && position.Y > currentShape.Key.Start.Y)
+                        modus = Modus.BottomRight;
+                    OnModusChanged(modus);
+                    break;
+
             }
             MoveAdorner(position);
         }
 
+        private void ResizeBottomLeft(Point position)
+        {
+            double positionBottomLeftX = position.X;
+            double positionBottomLeftY = position.Y;
+            currentShape.Key.Start = new Point(positionBottomLeftX, currentShape.Key.Start.Y);
+            currentShape.Key.End = new Point(currentShape.Key.End.X, positionBottomLeftY);
+            currentShape.Key.RotationCenter = new Point(currentShape.Key.Start.X + currentShape.Key.Area.Width / 2, currentShape.Key.Start.Y + currentShape.Key.Area.Height / 2);
+            OnShapeChanged(currentShape.Key, currentShape.Value, false);
+        }
+
+        private void ResizeTopRight(Point position)
+        {
+            double positionTopRightX = position.X;
+            double positionTopRightY = position.Y;
+            currentShape.Key.Start = new Point(currentShape.Key.Start.X, positionTopRightY);
+            currentShape.Key.End = new Point(positionTopRightX, currentShape.Key.End.Y);
+            currentShape.Key.RotationCenter = new Point(currentShape.Key.Start.X + currentShape.Key.Area.Width / 2, currentShape.Key.Start.Y + currentShape.Key.Area.Height / 2);
+            OnShapeChanged(currentShape.Key, currentShape.Value, false);
+        }
+
         private void ResizeBottomRight(Point position)
         {
-            currentShape.Key.End = new Point(position.X, position.Y);
+            double positionBottomRightX = position.X;
+            double positionBottomRightY = position.Y;
+            currentShape.Key.End = new Point(positionBottomRightX, positionBottomRightY);
             currentShape.Key.RotationCenter = new Point(currentShape.Key.Start.X + currentShape.Key.Area.Width / 2, currentShape.Key.Start.Y + currentShape.Key.Area.Height / 2);
             OnShapeChanged(currentShape.Key, currentShape.Value, false);
         }
