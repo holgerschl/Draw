@@ -194,4 +194,3 @@ C:\Users\holge\Source\Repos\Draw2\Draw\Draw\obj\x86\Debug\qualifiers.txt
 C:\Users\holge\Source\Repos\Draw2\Draw\Draw\obj\x86\Debug\qualifiers.txt.intermediate
 C:\Users\holge\Source\Repos\Draw2\Draw\Draw\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Users\holge\Source\Repos\Draw2\Draw\Draw\obj\x86\Debug\ProjectArchitectures.txt
-C:\Users\holge\Source\Repos\Draw2\Draw\Draw\obj\x86\Debug\Draw.csprojResolveAssemblyReference.cache

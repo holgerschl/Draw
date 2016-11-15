@@ -18,8 +18,6 @@ namespace Draw.Model
         private KeyValuePair<Shape, ShapeType> currentShape;
         private bool shapeDrawingActive = false;
         private Adorner adorner;
-        private double projectedWidth;
-        private double projectedHeight;
 
         public DrawModel()
         {
@@ -287,9 +285,68 @@ namespace Draw.Model
                         modus = Modus.BottomRight;
                     OnModusChanged(modus);
                     break;
-
+                case Modus.TopCenter:
+                    if (position.Y < currentShape.Key.End.Y)
+                        ResizeTopCenter(position);
+                    else if (position.Y >= currentShape.Key.End.Y)
+                        modus = Modus.BottomCenter;
+                    OnModusChanged(modus);
+                    break;
+                case Modus.BottomCenter:
+                    if (position.Y > currentShape.Key.Start.Y)
+                        ResizeBottomCenter(position);
+                    else if (position.Y <= currentShape.Key.Start.Y)
+                        modus = Modus.TopCenter;
+                    OnModusChanged(modus);
+                    break;
+                case Modus.CenterLeft:
+                    if (position.X < currentShape.Key.End.X)
+                        ResizeCenterLeft(position);
+                    else if (position.X >= currentShape.Key.End.X)
+                        modus = Modus.CenterRight;
+                    OnModusChanged(modus);
+                    break;
+                case Modus.CenterRight:
+                    if (position.X > currentShape.Key.Start.X)
+                        ResizeCenterRight(position);
+                    else if (position.X <= currentShape.Key.Start.X)
+                        modus = Modus.CenterLeft;
+                    OnModusChanged(modus);
+                    break;
             }
             MoveAdorner(position);
+        }
+
+        private void ResizeCenterRight(Point position)
+        {
+            double positionCenterRightX = position.X;
+            currentShape.Key.End = new Point(positionCenterRightX, currentShape.Key.End.Y);
+            currentShape.Key.RotationCenter = new Point(currentShape.Key.Start.X + currentShape.Key.Area.Width / 2, currentShape.Key.Start.Y + currentShape.Key.Area.Height / 2);
+            OnShapeChanged(currentShape.Key, currentShape.Value, false);
+        }
+
+        private void ResizeCenterLeft(Point position)
+        {
+            double positionCenterLeftX = position.X;
+            currentShape.Key.Start = new Point(positionCenterLeftX,currentShape.Key.Start.Y);
+            currentShape.Key.RotationCenter = new Point(currentShape.Key.Start.X + currentShape.Key.Area.Width / 2, currentShape.Key.Start.Y + currentShape.Key.Area.Height / 2);
+            OnShapeChanged(currentShape.Key, currentShape.Value, false);
+        }
+
+        private void ResizeBottomCenter(Point position)
+        {
+            double positionBottomCenterY = position.Y;
+            currentShape.Key.End = new Point(currentShape.Key.End.X, positionBottomCenterY);
+            currentShape.Key.RotationCenter = new Point(currentShape.Key.Start.X + currentShape.Key.Area.Width / 2, currentShape.Key.Start.Y + currentShape.Key.Area.Height / 2);
+            OnShapeChanged(currentShape.Key, currentShape.Value, false);
+        }
+
+        private void ResizeTopCenter(Point position)
+        {
+            double positionTopCenterY = position.Y;
+            currentShape.Key.Start = new Point(currentShape.Key.Start.X, positionTopCenterY);
+            currentShape.Key.RotationCenter = new Point(currentShape.Key.Start.X + currentShape.Key.Area.Width / 2, currentShape.Key.Start.Y + currentShape.Key.Area.Height / 2);
+            OnShapeChanged(currentShape.Key, currentShape.Value, false);
         }
 
         private void ResizeBottomLeft(Point position)
