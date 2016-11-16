@@ -321,15 +321,15 @@ namespace Draw.Model
         {
             double positionCenterRightX = position.X;
             currentShape.Key.End = new Point(positionCenterRightX, currentShape.Key.End.Y);
-            currentShape.Key.RotationCenter = new Point(currentShape.Key.Start.X + currentShape.Key.Area.Width / 2, currentShape.Key.Start.Y + currentShape.Key.Area.Height / 2);
+            //currentShape.Key.RotationCenter = new Point(currentShape.Key.Start.X + currentShape.Key.Area.Width / 2, currentShape.Key.Start.Y + currentShape.Key.Area.Height / 2);
             OnShapeChanged(currentShape.Key, currentShape.Value, false);
         }
 
         private void ResizeCenterLeft(Point position)
         {
             double positionCenterLeftX = position.X;
-            currentShape.Key.Start = new Point(positionCenterLeftX,currentShape.Key.Start.Y);
-            currentShape.Key.RotationCenter = new Point(currentShape.Key.Start.X + currentShape.Key.Area.Width / 2, currentShape.Key.Start.Y + currentShape.Key.Area.Height / 2);
+            currentShape.Key.Start = new Point(positionCenterLeftX, currentShape.Key.Start.Y);
+            //currentShape.Key.RotationCenter = new Point(currentShape.Key.Start.X + currentShape.Key.Area.Width / 2, currentShape.Key.Start.Y + currentShape.Key.Area.Height / 2);
             OnShapeChanged(currentShape.Key, currentShape.Value, false);
         }
 
@@ -337,7 +337,7 @@ namespace Draw.Model
         {
             double positionBottomCenterY = position.Y;
             currentShape.Key.End = new Point(currentShape.Key.End.X, positionBottomCenterY);
-            currentShape.Key.RotationCenter = new Point(currentShape.Key.Start.X + currentShape.Key.Area.Width / 2, currentShape.Key.Start.Y + currentShape.Key.Area.Height / 2);
+            //currentShape.Key.RotationCenter = new Point(currentShape.Key.Start.X + currentShape.Key.Area.Width / 2, currentShape.Key.Start.Y + currentShape.Key.Area.Height / 2);
             OnShapeChanged(currentShape.Key, currentShape.Value, false);
         }
 
@@ -345,7 +345,7 @@ namespace Draw.Model
         {
             double positionTopCenterY = position.Y;
             currentShape.Key.Start = new Point(currentShape.Key.Start.X, positionTopCenterY);
-            currentShape.Key.RotationCenter = new Point(currentShape.Key.Start.X + currentShape.Key.Area.Width / 2, currentShape.Key.Start.Y + currentShape.Key.Area.Height / 2);
+            //currentShape.Key.RotationCenter = new Point(currentShape.Key.Start.X + currentShape.Key.Area.Width / 2, currentShape.Key.Start.Y + currentShape.Key.Area.Height / 2);
             OnShapeChanged(currentShape.Key, currentShape.Value, false);
         }
 
@@ -355,7 +355,7 @@ namespace Draw.Model
             double positionBottomLeftY = position.Y;
             currentShape.Key.Start = new Point(positionBottomLeftX, currentShape.Key.Start.Y);
             currentShape.Key.End = new Point(currentShape.Key.End.X, positionBottomLeftY);
-            currentShape.Key.RotationCenter = new Point(currentShape.Key.Start.X + currentShape.Key.Area.Width / 2, currentShape.Key.Start.Y + currentShape.Key.Area.Height / 2);
+            //currentShape.Key.RotationCenter = new Point(currentShape.Key.Start.X + currentShape.Key.Area.Width / 2, currentShape.Key.Start.Y + currentShape.Key.Area.Height / 2);
             OnShapeChanged(currentShape.Key, currentShape.Value, false);
         }
 
@@ -365,25 +365,39 @@ namespace Draw.Model
             double positionTopRightY = position.Y;
             currentShape.Key.Start = new Point(currentShape.Key.Start.X, positionTopRightY);
             currentShape.Key.End = new Point(positionTopRightX, currentShape.Key.End.Y);
-            currentShape.Key.RotationCenter = new Point(currentShape.Key.Start.X + currentShape.Key.Area.Width / 2, currentShape.Key.Start.Y + currentShape.Key.Area.Height / 2);
+            //currentShape.Key.RotationCenter = new Point(currentShape.Key.Start.X + currentShape.Key.Area.Width / 2, currentShape.Key.Start.Y + currentShape.Key.Area.Height / 2);
             OnShapeChanged(currentShape.Key, currentShape.Value, false);
         }
 
         private void ResizeBottomRight(Point position)
         {
+            double currentShapeWidth = currentShape.Key.Area.Width;
+            double currentShapeHeight = currentShape.Key.Area.Height;
             double positionBottomRightX = position.X;
             double positionBottomRightY = position.Y;
             currentShape.Key.End = new Point(positionBottomRightX, positionBottomRightY);
-            currentShape.Key.RotationCenter = new Point(currentShape.Key.Start.X + currentShape.Key.Area.Width / 2, currentShape.Key.Start.Y + currentShape.Key.Area.Height / 2);
+            //currentShape.Key.RotationCenter = new Point(currentShape.Key.Start.X + currentShape.Key.Area.Width / 2, currentShape.Key.Start.Y + currentShape.Key.Area.Height / 2);
             OnShapeChanged(currentShape.Key, currentShape.Value, false);
         }
 
 
         private void ResizeTopLeft(Point position)
         {
-            double positionTopLeftX = position.X;
-            double positionTopLeftY = position.Y;
+            double currentShapeWidth = currentShape.Key.Area.Width;
+            double currentShapeHeight = currentShape.Key.Area.Height;
+            double positionTopLeftX = position.X - (
+                (currentShape.Key.Area.Width / 2) * (1 - Math.Cos(Math.PI / 180 * currentShape.Key.Rotation))
+                + (currentShape.Key.Area.Height / 2) * Math.Sin(Math.PI / 180 * currentShape.Key.Rotation));
+            double positionTopLeftY = position.Y + (
+                (currentShape.Key.Area.Width / 2) * Math.Sin(Math.PI / 180 * currentShape.Key.Rotation)
+                - (currentShape.Key.Area.Height / 2) * (1 - Math.Cos(Math.PI / 180 * currentShape.Key.Rotation)));
+            double angle = currentShape.Key.Rotation;
             currentShape.Key.Start = new Point(positionTopLeftX, positionTopLeftY);
+            currentShape.Key.End = new Point(positionTopLeftX + currentShape.Key.Area.Width
+                - ((currentShapeHeight - currentShape.Key.Area.Height) / 2 * Math.Sin(Math.PI / 180 * currentShape.Key.Rotation))
+                , positionTopLeftY + currentShape.Key.Area.Height
+                + ((currentShapeWidth - currentShape.Key.Area.Width) / 2 * Math.Sin(Math.PI / 180 * currentShape.Key.Rotation))
+                );
             currentShape.Key.RotationCenter = new Point(currentShape.Key.Start.X + currentShape.Key.Area.Width / 2, currentShape.Key.Start.Y + currentShape.Key.Area.Height / 2);
             OnShapeChanged(currentShape.Key, currentShape.Value, false);
         }

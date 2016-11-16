@@ -22,13 +22,13 @@
     <AppXManifest Include="C:\Users\holge\Source\Repos\Draw2\Draw\Draw\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-11-15T10:37:39.816</Modified>
+      <Modified>2016-11-16T11:17:29.203</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\holge\Source\Repos\Draw2\Draw\Draw\bin\x86\Debug\Draw.exe">
       <PackagePath>entrypoint\Draw.exe</PackagePath>
-      <Modified>2016-11-15T10:37:39.480</Modified>
+      <Modified>2016-11-16T11:17:28.888</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\holge\.nuget\packages\Microsoft.CSharp\4.0.0\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -490,11 +490,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\holge\Source\Repos\Draw2\Draw\Draw\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2016-11-15T10:35:04.697</Modified>
+      <Modified>2016-11-16T09:26:44.311</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\holge\Source\Repos\Draw2\Draw\Draw\bin\x86\Debug\Core\Draw.exe">
       <PackagePath>Draw.exe</PackagePath>
-      <Modified>2016-11-15T10:37:39.811</Modified>
+      <Modified>2016-11-16T11:17:29.198</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
