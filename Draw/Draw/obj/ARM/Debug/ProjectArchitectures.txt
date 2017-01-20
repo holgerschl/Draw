@@ -1,1 +1,0 @@
-C:\Users\holge\Source\Repos\Draw2\Draw\Draw\Draw.csproj;arm

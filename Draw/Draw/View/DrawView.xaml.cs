@@ -100,5 +100,10 @@ namespace Draw.View
             else
                 viewModel.SetShape( e.GetCurrentPoint(itemsControl).Position);
         }
+
+        private void delete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

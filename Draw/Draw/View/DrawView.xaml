@@ -40,6 +40,9 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
+        <Button x:Name="delete" HorizontalAlignment="Left" Margin="10,140,0,0"  Grid.Row="1" VerticalAlignment="Top" Width="30" Height="25" Click="delete_Click">
+            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xEF19;" Margin="-5,-5,-5,-5"/>
+        </Button>
             <Button x:Name="line" HorizontalAlignment="Left" Margin="10,50,0,0" Grid.Row="1" VerticalAlignment="Top" Width="30" Height="25" Click="line_Click">
                  <Path Data="M10,10 L50,-1" Fill="#FFF4F4F5" Height="10" Stretch="Fill" Stroke="Black" VerticalAlignment="Top" Width="10"/>
         </Button>
